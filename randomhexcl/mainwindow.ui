@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout_6">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="tab1">
+       <attribute name="title">
+        <string>Main</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="BoardWidget" name="boardView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="renderHints">
+           <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::TextAntialiasing</set>
+          </property>
+          <property name="cacheMode">
+           <set>QGraphicsView::CacheBackground</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="panel1">
+          <property name="title">
+           <string>Control Panel</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QFrame" name="frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <layout class="QGridLayout" name="gridLayout_3">
+                <item row="0" column="2">
+                 <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+                </item>
+                <item row="0" column="0">
+                 <layout class="QVBoxLayout" name="verticalLayout_4">
+                  <item>
+                   <widget class="QPushButton" name="fillBoard">
+                    <property name="text">
+                     <string>Fill Board</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="articulationPoint">
+                    <property name="text">
+                     <string>Find Pivots</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QPushButton" name="fillAndPivots">
+                  <property name="text">
+                   <string>Board and Pivots</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_4">
+                <item row="0" column="1">
+                 <widget class="QSpinBox" name="mainProb">
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <number>100</number>
+                  </property>
+                  <property name="value">
+                   <number>50</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QSpinBox" name="mainSize">
+                  <property name="minimum">
+                   <number>2</number>
+                  </property>
+                  <property name="maximum">
+                   <number>19</number>
+                  </property>
+                  <property name="value">
+                   <number>11</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0" alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Probability p=</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0" alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="label_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Board size n=</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab2">
+       <attribute name="title">
+        <string>Pivots</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="BoardWidget" name="boardViewSim">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::WinPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>6</number>
+          </property>
+          <property name="midLineWidth">
+           <number>6</number>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="renderHints">
+           <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::TextAntialiasing</set>
+          </property>
+          <property name="cacheMode">
+           <set>QGraphicsView::CacheBackground</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="panel2">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="title">
+           <string>Control Panel</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QPushButton" name="simulatePivot">
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Most Pivotal Hexes</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="0" alignment="Qt::AlignRight">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Board Size n= </string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" alignment="Qt::AlignRight">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Waiting time t=</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QSpinBox" name="simSize">
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>19</number>
+               </property>
+               <property name="value">
+                <number>11</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QSpinBox" name="waitTimeSim">
+               <property name="maximum">
+                <number>2000</number>
+               </property>
+               <property name="singleStep">
+                <number>100</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QProgressBar" name="progressBarSim">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>true</bool>
+          </property>
+          <property name="invertedAppearance">
+           <bool>false</bool>
+          </property>
+          <property name="format">
+           <string>%p%</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab4">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="title">
+        <string>Page</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="BoardWidget" name="gameView">
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="renderHints">
+           <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::TextAntialiasing</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4" rowspan="3">
+         <widget class="QGroupBox" name="panel3">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Controls</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QPushButton" name="startRandom">
+             <property name="text">
+              <string>Start Random Game</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="startAlternative">
+             <property name="text">
+              <string>Start Alternative Game</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="nextRandomTurn">
+             <property name="text">
+              <string>Next Random Move</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="resetGame">
+             <property name="text">
+              <string>Reset Game</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_7">
+             <item row="0" column="1">
+              <widget class="QSpinBox" name="gameWaitTime"/>
+             </item>
+             <item row="0" column="0" alignment="Qt::AlignRight">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Waiting time t=</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Move probability p=</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="gameProb">
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="value">
+                <number>50</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="Line" name="line_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="moveWhite">
+             <property name="text">
+              <string>Move White</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="moveBlack">
+             <property name="text">
+              <string>Move Black</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <item row="1" column="2">
+              <widget class="QSpinBox" name="gameSize">
+               <property name="minimum">
+                <number>2</number>
+               </property>
+               <property name="maximum">
+                <number>19</number>
+               </property>
+               <property name="value">
+                <number>11</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" alignment="Qt::AlignRight">
+              <widget class="QLabel" name="label_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Board size n=</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QProgressBar" name="gameProgress">
+          <property name="value">
+           <number>24</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="BoardWidget" name="gameViewSim">
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="renderHints">
+           <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::TextAntialiasing</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>BoardWidget</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">boardwidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

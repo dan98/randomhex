@@ -16,7 +16,7 @@ class GamePlayer:
         pass
 
     # Constructor.
-    #  black and white are programs.
+    #  blenui:?,tbeuinboack and white are programs.
     #  size is boardsize. 
     def __init__(self, black, white, size):
         self._black = self._origblack = black
