@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    std::pair<int,int> makeMove(bool col);
+    std::pair<int,int> makeMove(bool col, int tt = 50000);
 private slots:
     void on_fillBoard_clicked();
 

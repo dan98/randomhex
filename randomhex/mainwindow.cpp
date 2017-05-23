@@ -174,20 +174,23 @@ void MainWindow::on_moveWhite_clicked()
 void MainWindow::on_startAlternative_clicked(){
   on_resetGame_clicked();
   int curr = 0;
+  int nrmoves = 50000;
   std::pair<int, int> rs = std::make_pair(1, 1);
   while(rs != std::make_pair(0, 0))
   {
-    rs = makeMove(curr);
+    rs = makeMove(curr, nrmoves);
     curr = !curr;
   }
 }
 
 void MainWindow::on_startRandom_clicked(){
   on_resetGame_clicked();
+  int nrmoves = 50000;
   std::pair<int, int> rs = std::make_pair(1, 1);
   while(rs != std::make_pair(0, 0))
   {
-    rs = makeMove((rand()%100)<gameProb);
+    rs = makeMove((rand()%100)<gameProb, nrmoves);
+    nrmoves -= 700;
   }
 }
 
@@ -199,11 +202,10 @@ void MainWindow::on_resetGame_clicked()
   ui->gameViewSim->setBoard(gameBoard);
 }
 
-std::pair<int, int> MainWindow::makeMove(bool col){
+std::pair<int, int> MainWindow::makeMove(bool col, int tt){
 
     ui->gameViewSim->getItem()->setStyle(0, 0, 1, 1);
 
-    int tt = 50000;
     ui->gameProgress->setRange(1, 100);
     ui->gameProgress->setVisible(1);
 
@@ -225,7 +227,6 @@ std::pair<int, int> MainWindow::makeMove(bool col){
     gameBoard->findArticulationPoints(2);
 
     gameBoard->move(rs.first, rs.second, col);
-    std::cout<<col<<" "<<rs.first<<" "<<rs.second<<"\n";
     ui->gameView->scene()->update();
 
     QApplication::restoreOverrideCursor();
