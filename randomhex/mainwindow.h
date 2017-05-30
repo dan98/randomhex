@@ -41,10 +41,12 @@ private slots:
     void setMSize(int v);
     void setSSize(int v);
     void setWaitTimeSim(int v);
+    void setSimCenter(int k);
 
     void setGameWaitTime(int v);
     void setGameProb(int v);
     void setGameSize(int v);
+    void setGameCenter(int k);
 
 private:
     Ui::MainWindow *ui;
@@ -56,10 +58,13 @@ private:
 
     int mProb;
     int waitTimeSim;
+    int simCenter;
 
+    const double game_eps = 0.005;
     int gameWaitTime;
     int gameProb;
     int gameSize;
+    int gameCenter;
 };
 
 #endif // MAINWINDOW_H

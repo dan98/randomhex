@@ -69,6 +69,8 @@ public:
     QLabel *label_6;
     QSpinBox *simSize;
     QSpinBox *waitTimeSim;
+    QSpinBox *simCenter;
+    QLabel *label_9;
     QProgressBar *progressBarSim;
     QWidget *tab4;
     QGridLayout *gridLayout;
@@ -80,6 +82,10 @@ public:
     QFrame *line;
     QPushButton *nextRandomTurn;
     QPushButton *resetGame;
+    QFrame *line_3;
+    QGridLayout *gridLayout_8;
+    QSpinBox *gameCenter;
+    QLabel *label_8;
     QGridLayout *gridLayout_7;
     QSpinBox *gameWaitTime;
     QLabel *label_7;
@@ -272,12 +278,12 @@ public:
         label_5 = new QLabel(panel2);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        gridLayout_6->addWidget(label_5, 0, 0, 1, 1, Qt::AlignRight);
+        gridLayout_6->addWidget(label_5, 1, 0, 1, 1, Qt::AlignRight);
 
         label_6 = new QLabel(panel2);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
-        gridLayout_6->addWidget(label_6, 1, 0, 1, 1, Qt::AlignRight);
+        gridLayout_6->addWidget(label_6, 2, 0, 1, 1, Qt::AlignRight);
 
         simSize = new QSpinBox(panel2);
         simSize->setObjectName(QString::fromUtf8("simSize"));
@@ -285,14 +291,25 @@ public:
         simSize->setMaximum(19);
         simSize->setValue(11);
 
-        gridLayout_6->addWidget(simSize, 0, 2, 1, 1);
+        gridLayout_6->addWidget(simSize, 1, 2, 1, 1);
 
         waitTimeSim = new QSpinBox(panel2);
         waitTimeSim->setObjectName(QString::fromUtf8("waitTimeSim"));
         waitTimeSim->setMaximum(2000);
         waitTimeSim->setSingleStep(100);
 
-        gridLayout_6->addWidget(waitTimeSim, 1, 2, 1, 1);
+        gridLayout_6->addWidget(waitTimeSim, 2, 2, 1, 1);
+
+        simCenter = new QSpinBox(panel2);
+        simCenter->setObjectName(QString::fromUtf8("simCenter"));
+        simCenter->setMaximum(8);
+
+        gridLayout_6->addWidget(simCenter, 0, 2, 1, 1);
+
+        label_9 = new QLabel(panel2);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        gridLayout_6->addWidget(label_9, 0, 0, 1, 1);
 
 
         verticalLayout->addLayout(gridLayout_6);
@@ -360,6 +377,30 @@ public:
         resetGame->setObjectName(QString::fromUtf8("resetGame"));
 
         verticalLayout_5->addWidget(resetGame);
+
+        line_3 = new QFrame(panel3);
+        line_3->setObjectName(QString::fromUtf8("line_3"));
+        line_3->setFrameShape(QFrame::HLine);
+        line_3->setFrameShadow(QFrame::Sunken);
+
+        verticalLayout_5->addWidget(line_3);
+
+        gridLayout_8 = new QGridLayout();
+        gridLayout_8->setSpacing(6);
+        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        gameCenter = new QSpinBox(panel3);
+        gameCenter->setObjectName(QString::fromUtf8("gameCenter"));
+        gameCenter->setMaximum(9);
+
+        gridLayout_8->addWidget(gameCenter, 0, 1, 1, 1);
+
+        label_8 = new QLabel(panel3);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        gridLayout_8->addWidget(label_8, 0, 0, 1, 1, Qt::AlignRight);
+
+
+        verticalLayout_5->addLayout(gridLayout_8);
 
         gridLayout_7 = new QGridLayout();
         gridLayout_7->setSpacing(6);
@@ -467,7 +508,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -488,6 +529,7 @@ public:
         simulatePivot->setText(QApplication::translate("MainWindow", "Most Pivotal Hexes", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("MainWindow", "Board Size n= ", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "Waiting time t=", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("MainWindow", "Center Size", 0, QApplication::UnicodeUTF8));
         progressBarSim->setFormat(QApplication::translate("MainWindow", "%p%", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab2), QApplication::translate("MainWindow", "Pivots", 0, QApplication::UnicodeUTF8));
         panel3->setTitle(QApplication::translate("MainWindow", "Controls", 0, QApplication::UnicodeUTF8));
@@ -495,12 +537,13 @@ public:
         startAlternative->setText(QApplication::translate("MainWindow", "Start Alternative Game", 0, QApplication::UnicodeUTF8));
         nextRandomTurn->setText(QApplication::translate("MainWindow", "Next Random Move", 0, QApplication::UnicodeUTF8));
         resetGame->setText(QApplication::translate("MainWindow", "Reset Game", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("MainWindow", "Center size s=", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("MainWindow", "Waiting time t=", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "Move probability p=", 0, QApplication::UnicodeUTF8));
         moveWhite->setText(QApplication::translate("MainWindow", "Move White", 0, QApplication::UnicodeUTF8));
         moveBlack->setText(QApplication::translate("MainWindow", "Move Black", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("MainWindow", "Board size n=", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(tab4), QApplication::translate("MainWindow", "Page", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab4), QApplication::translate("MainWindow", "Two Players", 0, QApplication::UnicodeUTF8));
         menuAbout->setTitle(QApplication::translate("MainWindow", "Help", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

@@ -3,6 +3,8 @@
 #include "board.h"
 
 #include <unistd.h>
+#include <cmath>
+#include <iomanip>
 
 #include <iostream>
 #include <QtConcurrentRun>
@@ -45,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     gameProb = 50;
     gameSize = 11;
     gameWaitTime = 0;
+    gameCenter = 0;
 
     connect(ui->mainProb, SIGNAL(valueChanged(int)),
         this, SLOT(setMProb(int)));
@@ -65,6 +68,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->gameSize, SIGNAL(valueChanged(int)),
         this, SLOT(setGameSize(int)));
+    connect(ui->gameCenter, SIGNAL(valueChanged(int)),
+        this, SLOT(setGameCenter(int)));
+
+    connect(ui->simCenter, SIGNAL(valueChanged(int)),
+        this, SLOT(setSimCenter(int)));
 }
 
 MainWindow::~MainWindow()
@@ -89,8 +97,26 @@ void MainWindow::setGameSize(int v){
   ui->gameViewSim->setBoard(gameBoard);
 }
 
+void MainWindow::setGameCenter(int v){
+  this->gameCenter = v;
+  if(gameCenter > 0){
+    gameBoard->disableCenter(gameCenter);
+  }
+  on_resetGame_clicked();
+}
+
 void MainWindow::setWaitTimeSim(int v){
   this->waitTimeSim = v;
+}
+
+void MainWindow::setSimCenter(int v){
+  mainBoardSim = new Board(mainBoardSim->boardSize());
+  ui->boardViewSim->setBoard(mainBoardSim);
+  this->simCenter = v;
+  if(simCenter > 0){
+    mainBoardSim->disableCenter(simCenter);
+  }
+  ui->boardViewSim->scene()->update();
 }
 
 void MainWindow::setMProb(int v){
@@ -187,10 +213,13 @@ void MainWindow::on_startRandom_clicked(){
   on_resetGame_clicked();
   int nrmoves = 50000;
   std::pair<int, int> rs = std::make_pair(1, 1);
+  bool ft = (rand()%100)<gameProb;
+  int n = gameBoard->boardSize();
+  gameBoard->move(n/2+n%2, n/2+n%2, ft);
+  ui->gameView->scene()->update();
   while(rs != std::make_pair(0, 0))
   {
     rs = makeMove((rand()%100)<gameProb, nrmoves);
-    nrmoves -= 700;
   }
 }
 
@@ -200,6 +229,8 @@ void MainWindow::on_resetGame_clicked()
   gameBoard = new Board(gameSize);
   ui->gameView->setBoard(gameBoard);
   ui->gameViewSim->setBoard(gameBoard);
+  if(gameCenter > 0)
+    gameBoard->disableCenter(gameCenter);
 }
 
 std::pair<int, int> MainWindow::makeMove(bool col, int tt){
@@ -213,12 +244,25 @@ std::pair<int, int> MainWindow::makeMove(bool col, int tt){
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     std::pair<int, int> rs;
+    std::cout<<std::setprecision(12);
+
     for(int i=1; i<=100; ++i){
       ui->gameProgress->setValue(i);
       rs = gameBoard->generateMove(tt/100, col);
+      int n = gameBoard->boardSize();
+
+      double diff = 0;
+      for(int j=1; j<=n; ++j)
+          for(int k=1; k<=n; ++k)
+            diff = std::max(gameBoard->getProb(j, k) - gameBoard->getProbPr(j, k), diff);
+      std::cout<<diff<<"\n";
+
+
       ui->gameViewSim->scene()->update();
       qApp->processEvents();
       usleep(1000*gameWaitTime);
+      if(diff<game_eps)
+        break;
     }
 
     gameBoard->marked = rs;

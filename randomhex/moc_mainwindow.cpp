@@ -22,7 +22,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   14, // methods
+      19,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -44,9 +44,11 @@ static const uint qt_meta_data_MainWindow[] = {
      288,  272,   11,   11, 0x08,
      302,  272,   11,   11, 0x08,
      316,  272,   11,   11, 0x08,
-     336,  272,   11,   11, 0x08,
-     357,  272,   11,   11, 0x08,
-     374,  272,   11,   11, 0x08,
+     338,  336,   11,   11, 0x08,
+     356,  272,   11,   11, 0x08,
+     377,  272,   11,   11, 0x08,
+     394,  272,   11,   11, 0x08,
+     411,  336,   11,   11, 0x08,
 
        0        // eod
 };
@@ -62,9 +64,10 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "on_startRandom_clicked()\0"
     "on_moveBlack_clicked()\0on_moveWhite_clicked()\0"
     "v\0setMProb(int)\0setMSize(int)\0"
-    "setSSize(int)\0setWaitTimeSim(int)\0"
-    "setGameWaitTime(int)\0setGameProb(int)\0"
-    "setGameSize(int)\0"
+    "setSSize(int)\0setWaitTimeSim(int)\0k\0"
+    "setSimCenter(int)\0setGameWaitTime(int)\0"
+    "setGameProb(int)\0setGameSize(int)\0"
+    "setGameCenter(int)\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -87,9 +90,11 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 11: _t->setMSize((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 12: _t->setSSize((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 13: _t->setWaitTimeSim((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 14: _t->setGameWaitTime((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 15: _t->setGameProb((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 16: _t->setGameSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->setSimCenter((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->setGameWaitTime((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->setGameProb((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: _t->setGameSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: _t->setGameCenter((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -127,9 +132,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 17)
+        if (_id < 19)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 17;
+        _id -= 19;
     }
     return _id;
 }

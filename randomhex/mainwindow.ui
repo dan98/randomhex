@@ -27,7 +27,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab1">
        <attribute name="title">
@@ -230,21 +230,21 @@
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout_6">
-             <item row="0" column="0" alignment="Qt::AlignRight">
+             <item row="1" column="0" alignment="Qt::AlignRight">
               <widget class="QLabel" name="label_5">
                <property name="text">
                 <string>Board Size n= </string>
                </property>
               </widget>
              </item>
-             <item row="1" column="0" alignment="Qt::AlignRight">
+             <item row="2" column="0" alignment="Qt::AlignRight">
               <widget class="QLabel" name="label_6">
                <property name="text">
                 <string>Waiting time t=</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="2">
+             <item row="1" column="2">
               <widget class="QSpinBox" name="simSize">
                <property name="minimum">
                 <number>1</number>
@@ -257,13 +257,27 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
+             <item row="2" column="2">
               <widget class="QSpinBox" name="waitTimeSim">
                <property name="maximum">
                 <number>2000</number>
                </property>
                <property name="singleStep">
                 <number>100</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QSpinBox" name="simCenter">
+               <property name="maximum">
+                <number>8</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Center Size</string>
                </property>
               </widget>
              </item>
@@ -304,7 +318,7 @@
         <bool>true</bool>
        </property>
        <attribute name="title">
-        <string>Page</string>
+        <string>Two Players</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
@@ -366,6 +380,31 @@
               <string>Reset Game</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_8">
+             <item row="0" column="1">
+              <widget class="QSpinBox" name="gameCenter">
+               <property name="maximum">
+                <number>9</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" alignment="Qt::AlignRight">
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>Center size s=</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout_7">

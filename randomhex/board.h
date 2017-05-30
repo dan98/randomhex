@@ -22,8 +22,11 @@ public:
   std::pair<int,int> generateMove(int t, bool col);
   void move(int i, int j, bool col);
   double getProb(int x, int y);
+  double getProbPr(int x, int y);
   bool isFixed(int i, int j);
   void resetMove();
+
+  void disableCenter(int k);
 
   std::pair<int, int> marked;
 
@@ -48,6 +51,7 @@ private:
   bool dfs2(int v, bool color);
   void buildGraph();
   double prob[BMAX][BMAX];
+  double probpr[BMAX][BMAX];
   int cnt[BMAX][BMAX];
   bool fixed[BMAX][BMAX];
 

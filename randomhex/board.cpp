@@ -44,6 +44,21 @@ double Board::getProb(int x, int y){
     return prob[x][y];
 }
 
+double Board::getProbPr(int x, int y){
+    return probpr[x][y];
+}
+
+void Board::disableCenter(int k){
+  int cen = n/2;
+
+  for(int i = -k+1; i<=k + (n%2); ++i){
+    for(int j = -k+1; j<=k + (n%2); ++j){
+      color[cen + i][cen + j] = -2;
+      fixed[cen + i][cen + j] = 1;
+    }
+  }
+}
+
 int Board::boardSize(){
     return n;
 }
@@ -75,9 +90,6 @@ void Board::move(int i, int j, bool col)
 }
 
 std::pair<int,int> Board::generateMove(int t, bool col){
-    for(int j=1; j<=n; ++j)
-        for(int k=1; k<=n; ++k)
-            prob[j][k] = 0;
 
     std::pair<int, int> rs;
 
@@ -98,14 +110,19 @@ std::pair<int,int> Board::generateMove(int t, bool col){
                 maxk = cnt[j][k];
                 rs = {j,k};
             }
-    int ssum=0;
+    long double ssum=0;
     for(int j=1; j<=n; ++j)
         for(int k=1; k<=n; ++k)
-          ssum += cnt[j][k];
+          ssum += cnt[j][k]*cnt[j][k];
+    ssum = sqrt(ssum);
 
     for(int j=1; j<=n; ++j)
         for(int k=1; k<=n; ++k)
-            prob[j][k]=1.0L * cnt[j][k]/std::max(ssum,1);
+          probpr[j][k] = prob[j][k];
+
+    for(int j=1; j<=n; ++j)
+        for(int k=1; k<=n; ++k)
+            prob[j][k]=1.0L * cnt[j][k]/std::max(ssum, 1.0L);
 
     for(int j=1; j<=n; ++j)
         for(int k=1; k<=n; ++k)

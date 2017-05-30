@@ -94,13 +94,13 @@ void BoardItem::paint(QPainter *painter,
                              yc + sin(acos(-1.0) / 180 * (60*k + 30)))*m_scale;
             }
 
-            if(showCol && m_board->getColor(i, j) != -1){
+            if(showCol && m_board->getColor(i, j) >= 0 ){
                 if(m_board->getColor(i, j))
                     painter->setBrush(Qt::darkGray);
                 else
                     painter->setBrush(Qt::white);
             }
-            else
+            if(m_board->getColor(i, j) == -1)
               painter->setBrush(QColor(242, 142, 174));
 
 
@@ -110,7 +110,8 @@ void BoardItem::paint(QPainter *painter,
                 painter->setBrush(col);
             }
 
-            painter->drawConvexPolygon(hex);
+            if(m_board->getColor(i, j) != -2)
+              painter->drawConvexPolygon(hex);
 
 
 
