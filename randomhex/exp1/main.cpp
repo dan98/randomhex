@@ -27,12 +27,11 @@ int winner[5];
 
 int main(int argc, char * argv[])
 {
-  srand(clock());
   cout<<setprecision(6)<<fixed;
   ios_base::sync_with_stdio(0);
   cin.tie(0);
 
-  if(argc != 2){
+  if(argc != 3){
     cerr<<"input error \n";
     return 0;
   }
@@ -40,18 +39,19 @@ int main(int argc, char * argv[])
   char buffer[50];
   char rndstr[50];
   int n = atoi(argv[1]);
+  srand(atoi(argv[2]));
 
   vector<entr> hist;
   pair<int, int> zeros = {0, 0};
   
-  int tt = 2;
+  int tt = 10000;
+
+  gen_random(rndstr, 7);
+  sprintf(buffer, "boards/%dx%d/%s.res", n, n, rndstr);
+  freopen(buffer, "w", stdout);
 
   for(int i=1; i<=tt; ++i){
     hist.clear();
-
-    gen_random(rndstr, 7);
-    sprintf(buffer, "boards/%dx%d/%s.res", n, n, rndstr);
-    freopen(buffer, "w", stdout);
 
     // read-write
 
@@ -95,8 +95,6 @@ int main(int argc, char * argv[])
     }
 
     delete exp;
-
-    fclose(stdout);
   }
 
 }
