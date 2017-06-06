@@ -403,7 +403,7 @@ void Board::buildGraph()
       }
 }
 
-void Board::findArticulationPoints(int col){
+int Board::findArticulationPoints(int col){
     std::memset(viz, 0, sizeof(viz));
     std::memset(piv, 0, sizeof(piv));
     std::memset(art, 0, sizeof(art));
@@ -420,6 +420,7 @@ void Board::findArticulationPoints(int col){
 
 
     std::memset(viz, 0, sizeof(viz));
+    int nr = 0;
 
     if(col == 2){
         for(int i=1; i<=B2; ++i){
@@ -428,12 +429,19 @@ void Board::findArticulationPoints(int col){
             }
         }
     }
-
-    for(int i=1; i<=B2; ++i){
-        if((vB2[i] && col) || (vW2[i] && !col)){
-            art[i] = piv[i];
-        }
+    else{
+      for(int i=1; i<=B2; ++i){
+          if((vB2[i] && col) || (vW2[i] && !col)){
+              art[i] = piv[i];
+          }
+      }
     }
+    for(int i=1; i<=n; ++i){
+      for(int j=1; j<=n; ++j){
+        nr += art[id[i][j]];
+      }
+    }
+    return nr;
 }
 
 

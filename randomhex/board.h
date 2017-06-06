@@ -18,7 +18,7 @@ public:
   bool isBridge(int x, int y);
   int boardSize();
   void fillRandom(int p);
-  void findArticulationPoints(int col);
+  int findArticulationPoints(int col);
   std::pair<int,int> generateMove(int t, bool col);
   void move(int i, int j, bool col);
   double getProb(int x, int y);
