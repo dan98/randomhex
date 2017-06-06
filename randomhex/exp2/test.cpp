@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
     time_t tic = clock();
 
     int tt=10;
+    srand(time(NULL));
 
     char buffer[50];
 

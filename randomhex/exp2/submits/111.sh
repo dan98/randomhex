@@ -4,4 +4,4 @@
 #SBATCH --ntasks=1
 #SBATCH --job-name=pp16
 #SBATCH --mem=500
-./simulate 16 1687926652
+./simulate 16 688426896
