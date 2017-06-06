@@ -65,7 +65,7 @@ void BoardItem::paint(QPainter *painter,
         return;
     }
 
-    int n = m_board->boardSize();
+    int n = m_board->boardSize() +2;
 
     double sq3 = sqrt(3.0L);
 
@@ -77,7 +77,7 @@ void BoardItem::paint(QPainter *painter,
     painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap));
 
     double mx = 0.00001;
-    std::pair<int, int> maxProb = {0, 0};
+    std::pair<int, int> maxProb = {-1, -1};
     for(int i=1; i<=n; ++i){
         for(int j=1; j<=n; ++j){
             if(m_board->getProb(i,j) > mx){
@@ -86,15 +86,15 @@ void BoardItem::paint(QPainter *painter,
             }
         }
     }
-    for(int i=1; i<=n; ++i){
-        for(int j=1; j<=n; ++j){
+    for(int i=0; i<n; ++i){
+        for(int j=0; j<n; ++j){
             QPolygonF hex;
             for(int k=0; k<6; ++k){
                 hex<<QPointF(xc + cos(acos(-1.0) / 180 * (60*k + 30)),
                              yc + sin(acos(-1.0) / 180 * (60*k + 30)))*m_scale;
             }
 
-            if(showCol && m_board->getColor(i, j) >= 0 ){
+            if((showCol || m_board->isFixed(i, j)) && m_board->getColor(i, j) >= 0 ){
                 if(m_board->getColor(i, j))
                     painter->setBrush(Qt::darkGray);
                 else
@@ -104,7 +104,7 @@ void BoardItem::paint(QPainter *painter,
               painter->setBrush(QColor(242, 142, 174));
 
 
-            if(showProb){
+            if(showProb && !m_board->isFixed(i, j)){
                 QColor col;
                 col.setHsl(240*(mx-m_board->getProb(i,j))/mx, 170, 150);
                 painter->setBrush(col);

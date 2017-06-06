@@ -10,7 +10,7 @@ class Board
 
 public:
 
-  Board(int size);
+  Board(int size, int type = 0, int x = 1);
   ~Board();
 
   int getColor(int x, int y);
@@ -50,6 +50,8 @@ private:
   void dfs(int v, bool color);
   bool dfs2(int v, bool color);
   void buildGraph();
+  void buildGraphTriangle(int x);
+  void buildGraphTrapezium(int x);
   double prob[BMAX][BMAX];
   double probpr[BMAX][BMAX];
   int cnt[BMAX][BMAX];

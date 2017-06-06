@@ -13,6 +13,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QComboBox>
 #include <QtGui/QFrame>
 #include <QtGui/QGridLayout>
 #include <QtGui/QGroupBox>
@@ -48,11 +49,16 @@ public:
     QFrame *frame;
     QVBoxLayout *verticalLayout_2;
     QGridLayout *gridLayout_3;
+    QPushButton *fillAndPivots;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_4;
     QPushButton *fillBoard;
     QPushButton *articulationPoint;
-    QPushButton *fillAndPivots;
+    QGridLayout *gridLayout_9;
+    QSpinBox *mainX;
+    QComboBox *mainType;
+    QLabel *label_10;
+    QLabel *label_11;
     QGridLayout *gridLayout_4;
     QSpinBox *mainProb;
     QSpinBox *mainSize;
@@ -64,13 +70,16 @@ public:
     QGroupBox *panel2;
     QVBoxLayout *verticalLayout;
     QPushButton *simulatePivot;
+    QGridLayout *gridLayout_10;
+    QSpinBox *simX;
+    QComboBox *simType;
+    QLabel *label_9;
+    QLabel *label_12;
     QGridLayout *gridLayout_6;
     QLabel *label_5;
     QLabel *label_6;
     QSpinBox *simSize;
     QSpinBox *waitTimeSim;
-    QSpinBox *simCenter;
-    QLabel *label_9;
     QProgressBar *progressBarSim;
     QWidget *tab4;
     QGridLayout *gridLayout;
@@ -83,9 +92,11 @@ public:
     QPushButton *nextRandomTurn;
     QPushButton *resetGame;
     QFrame *line_3;
-    QGridLayout *gridLayout_8;
-    QSpinBox *gameCenter;
-    QLabel *label_8;
+    QGridLayout *gridLayout_11;
+    QSpinBox *gameX;
+    QComboBox *gameType;
+    QLabel *label_13;
+    QLabel *label_14;
     QGridLayout *gridLayout_7;
     QSpinBox *gameWaitTime;
     QLabel *label_7;
@@ -161,6 +172,11 @@ public:
         gridLayout_3 = new QGridLayout();
         gridLayout_3->setSpacing(6);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        fillAndPivots = new QPushButton(frame);
+        fillAndPivots->setObjectName(QString::fromUtf8("fillAndPivots"));
+
+        gridLayout_3->addWidget(fillAndPivots, 0, 1, 1, 1);
+
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -183,13 +199,36 @@ public:
 
         gridLayout_3->addLayout(verticalLayout_4, 0, 0, 1, 1);
 
-        fillAndPivots = new QPushButton(frame);
-        fillAndPivots->setObjectName(QString::fromUtf8("fillAndPivots"));
-
-        gridLayout_3->addWidget(fillAndPivots, 0, 1, 1, 1);
-
 
         verticalLayout_2->addLayout(gridLayout_3);
+
+        gridLayout_9 = new QGridLayout();
+        gridLayout_9->setSpacing(6);
+        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+        mainX = new QSpinBox(frame);
+        mainX->setObjectName(QString::fromUtf8("mainX"));
+        mainX->setMinimum(1);
+        mainX->setMaximum(19);
+
+        gridLayout_9->addWidget(mainX, 1, 1, 1, 1);
+
+        mainType = new QComboBox(frame);
+        mainType->setObjectName(QString::fromUtf8("mainType"));
+
+        gridLayout_9->addWidget(mainType, 0, 1, 1, 1);
+
+        label_10 = new QLabel(frame);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        gridLayout_9->addWidget(label_10, 0, 0, 1, 1);
+
+        label_11 = new QLabel(frame);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+
+        gridLayout_9->addWidget(label_11, 1, 0, 1, 1);
+
+
+        verticalLayout_2->addLayout(gridLayout_9);
 
         gridLayout_4 = new QGridLayout();
         gridLayout_4->setSpacing(6);
@@ -272,18 +311,46 @@ public:
 
         verticalLayout->addWidget(simulatePivot);
 
+        gridLayout_10 = new QGridLayout();
+        gridLayout_10->setSpacing(6);
+        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
+        simX = new QSpinBox(panel2);
+        simX->setObjectName(QString::fromUtf8("simX"));
+        simX->setMinimum(1);
+        simX->setMaximum(19);
+
+        gridLayout_10->addWidget(simX, 1, 1, 1, 1);
+
+        simType = new QComboBox(panel2);
+        simType->setObjectName(QString::fromUtf8("simType"));
+
+        gridLayout_10->addWidget(simType, 0, 1, 1, 1);
+
+        label_9 = new QLabel(panel2);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        gridLayout_10->addWidget(label_9, 0, 0, 1, 1);
+
+        label_12 = new QLabel(panel2);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        gridLayout_10->addWidget(label_12, 1, 0, 1, 1);
+
+
+        verticalLayout->addLayout(gridLayout_10);
+
         gridLayout_6 = new QGridLayout();
         gridLayout_6->setSpacing(6);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
         label_5 = new QLabel(panel2);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        gridLayout_6->addWidget(label_5, 1, 0, 1, 1, Qt::AlignRight);
+        gridLayout_6->addWidget(label_5, 0, 0, 1, 1, Qt::AlignRight);
 
         label_6 = new QLabel(panel2);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
-        gridLayout_6->addWidget(label_6, 2, 0, 1, 1, Qt::AlignRight);
+        gridLayout_6->addWidget(label_6, 1, 0, 1, 1, Qt::AlignRight);
 
         simSize = new QSpinBox(panel2);
         simSize->setObjectName(QString::fromUtf8("simSize"));
@@ -291,25 +358,14 @@ public:
         simSize->setMaximum(19);
         simSize->setValue(11);
 
-        gridLayout_6->addWidget(simSize, 1, 2, 1, 1);
+        gridLayout_6->addWidget(simSize, 0, 2, 1, 1);
 
         waitTimeSim = new QSpinBox(panel2);
         waitTimeSim->setObjectName(QString::fromUtf8("waitTimeSim"));
         waitTimeSim->setMaximum(2000);
         waitTimeSim->setSingleStep(100);
 
-        gridLayout_6->addWidget(waitTimeSim, 2, 2, 1, 1);
-
-        simCenter = new QSpinBox(panel2);
-        simCenter->setObjectName(QString::fromUtf8("simCenter"));
-        simCenter->setMaximum(8);
-
-        gridLayout_6->addWidget(simCenter, 0, 2, 1, 1);
-
-        label_9 = new QLabel(panel2);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
-
-        gridLayout_6->addWidget(label_9, 0, 0, 1, 1);
+        gridLayout_6->addWidget(waitTimeSim, 1, 2, 1, 1);
 
 
         verticalLayout->addLayout(gridLayout_6);
@@ -346,7 +402,12 @@ public:
 
         panel3 = new QGroupBox(tab4);
         panel3->setObjectName(QString::fromUtf8("panel3"));
-        panel3->setMinimumSize(QSize(200, 100));
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(panel3->sizePolicy().hasHeightForWidth());
+        panel3->setSizePolicy(sizePolicy3);
+        panel3->setMinimumSize(QSize(200, 686));
         verticalLayout_5 = new QVBoxLayout(panel3);
         verticalLayout_5->setSpacing(6);
         verticalLayout_5->setContentsMargins(11, 11, 11, 11);
@@ -385,22 +446,33 @@ public:
 
         verticalLayout_5->addWidget(line_3);
 
-        gridLayout_8 = new QGridLayout();
-        gridLayout_8->setSpacing(6);
-        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
-        gameCenter = new QSpinBox(panel3);
-        gameCenter->setObjectName(QString::fromUtf8("gameCenter"));
-        gameCenter->setMaximum(9);
+        gridLayout_11 = new QGridLayout();
+        gridLayout_11->setSpacing(6);
+        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
+        gameX = new QSpinBox(panel3);
+        gameX->setObjectName(QString::fromUtf8("gameX"));
+        gameX->setMinimum(1);
+        gameX->setMaximum(19);
 
-        gridLayout_8->addWidget(gameCenter, 0, 1, 1, 1);
+        gridLayout_11->addWidget(gameX, 1, 1, 1, 1);
 
-        label_8 = new QLabel(panel3);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        gameType = new QComboBox(panel3);
+        gameType->setObjectName(QString::fromUtf8("gameType"));
 
-        gridLayout_8->addWidget(label_8, 0, 0, 1, 1, Qt::AlignRight);
+        gridLayout_11->addWidget(gameType, 0, 1, 1, 1);
+
+        label_13 = new QLabel(panel3);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+
+        gridLayout_11->addWidget(label_13, 0, 0, 1, 1);
+
+        label_14 = new QLabel(panel3);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+
+        gridLayout_11->addWidget(label_14, 1, 0, 1, 1);
 
 
-        verticalLayout_5->addLayout(gridLayout_8);
+        verticalLayout_5->addLayout(gridLayout_11);
 
         gridLayout_7 = new QGridLayout();
         gridLayout_7->setSpacing(6);
@@ -508,7 +580,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -519,17 +591,20 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
         actionAbout->setText(QApplication::translate("MainWindow", "About", 0, QApplication::UnicodeUTF8));
         panel1->setTitle(QApplication::translate("MainWindow", "Control Panel", 0, QApplication::UnicodeUTF8));
+        fillAndPivots->setText(QApplication::translate("MainWindow", "Board and Pivots", 0, QApplication::UnicodeUTF8));
         fillBoard->setText(QApplication::translate("MainWindow", "Fill Board", 0, QApplication::UnicodeUTF8));
         articulationPoint->setText(QApplication::translate("MainWindow", "Find Pivots", 0, QApplication::UnicodeUTF8));
-        fillAndPivots->setText(QApplication::translate("MainWindow", "Board and Pivots", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("MainWindow", "Board Type", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("MainWindow", "X = ", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "Probability p=", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "Board size n=", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab1), QApplication::translate("MainWindow", "Main", 0, QApplication::UnicodeUTF8));
         panel2->setTitle(QApplication::translate("MainWindow", "Control Panel", 0, QApplication::UnicodeUTF8));
         simulatePivot->setText(QApplication::translate("MainWindow", "Most Pivotal Hexes", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("MainWindow", "Game Type", 0, QApplication::UnicodeUTF8));
+        label_12->setText(QApplication::translate("MainWindow", "X = ", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("MainWindow", "Board Size n= ", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "Waiting time t=", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("MainWindow", "Center Size", 0, QApplication::UnicodeUTF8));
         progressBarSim->setFormat(QApplication::translate("MainWindow", "%p%", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab2), QApplication::translate("MainWindow", "Pivots", 0, QApplication::UnicodeUTF8));
         panel3->setTitle(QApplication::translate("MainWindow", "Controls", 0, QApplication::UnicodeUTF8));
@@ -537,7 +612,8 @@ public:
         startAlternative->setText(QApplication::translate("MainWindow", "Start Alternative Game", 0, QApplication::UnicodeUTF8));
         nextRandomTurn->setText(QApplication::translate("MainWindow", "Next Random Move", 0, QApplication::UnicodeUTF8));
         resetGame->setText(QApplication::translate("MainWindow", "Reset Game", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("MainWindow", "Center size s=", 0, QApplication::UnicodeUTF8));
+        label_13->setText(QApplication::translate("MainWindow", "Game Type", 0, QApplication::UnicodeUTF8));
+        label_14->setText(QApplication::translate("MainWindow", "X = ", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("MainWindow", "Waiting time t=", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "Move probability p=", 0, QApplication::UnicodeUTF8));
         moveWhite->setText(QApplication::translate("MainWindow", "Move White", 0, QApplication::UnicodeUTF8));

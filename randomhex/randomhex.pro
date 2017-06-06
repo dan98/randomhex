@@ -24,3 +24,5 @@ HEADERS  += mainwindow.h \
     board.h
 
 FORMS    += mainwindow.ui
+
+QMAKE_CXXFLAGS += -std=c++11

@@ -22,7 +22,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   14, // methods
+      26,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -42,11 +42,20 @@ static const uint qt_meta_data_MainWindow[] = {
      249,   11,   11,   11, 0x08,
      274,  272,   11,   11, 0x08,
      288,  272,   11,   11, 0x08,
-     302,  272,   11,   11, 0x08,
-     316,  272,   11,   11, 0x08,
-     336,  272,   11,   11, 0x08,
-     357,  272,   11,   11, 0x08,
-     374,  272,   11,   11, 0x08,
+     305,  272,   11,   11, 0x08,
+     321,  272,   11,   11, 0x08,
+     341,  272,   11,   11, 0x08,
+     362,  272,   11,   11, 0x08,
+     379,  272,   11,   11, 0x08,
+     396,   11,   11,   11, 0x08,
+     408,   11,   11,   11, 0x08,
+     419,   11,   11,   11, 0x08,
+     433,  431,   11,   11, 0x08,
+     452,  450,   11,   11, 0x08,
+     466,  431,   11,   11, 0x08,
+     482,  450,   11,   11, 0x08,
+     495,  431,   11,   11, 0x08,
+     512,  450,   11,   11, 0x08,
 
        0        // eod
 };
@@ -61,10 +70,14 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "on_startAlternative_clicked()\0"
     "on_startRandom_clicked()\0"
     "on_moveBlack_clicked()\0on_moveWhite_clicked()\0"
-    "v\0setMProb(int)\0setMSize(int)\0"
-    "setSSize(int)\0setWaitTimeSim(int)\0"
+    "v\0setMProb(int)\0setMainSize(int)\0"
+    "setSimSize(int)\0setWaitTimeSim(int)\0"
     "setGameWaitTime(int)\0setGameProb(int)\0"
-    "setGameSize(int)\0"
+    "setGameSize(int)\0resetMain()\0resetSim()\0"
+    "resetGame()\0k\0setMainType(int)\0x\0"
+    "setMainX(int)\0setSimType(int)\0"
+    "setSimX(int)\0setGameType(int)\0"
+    "setGameX(int)\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -84,12 +97,21 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 8: _t->on_moveBlack_clicked(); break;
         case 9: _t->on_moveWhite_clicked(); break;
         case 10: _t->setMProb((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->setMSize((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: _t->setSSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: _t->setMainSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: _t->setSimSize((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 13: _t->setWaitTimeSim((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 14: _t->setGameWaitTime((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 15: _t->setGameProb((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 16: _t->setGameSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: _t->resetMain(); break;
+        case 18: _t->resetSim(); break;
+        case 19: _t->resetGame(); break;
+        case 20: _t->setMainType((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 21: _t->setMainX((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 22: _t->setSimType((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 23: _t->setSimX((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 24: _t->setGameType((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 25: _t->setGameX((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -127,9 +149,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 17)
+        if (_id < 26)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 17;
+        _id -= 26;
     }
     return _id;
 }

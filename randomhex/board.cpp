@@ -8,7 +8,7 @@
 #include <cstring>
 
 
-Board::Board(int size){
+Board::Board(int size, int type, int x){
   n = size;
   std::memset(prob, 0, sizeof(prob));
   std::memset(cnt, 0, sizeof(cnt));
@@ -18,7 +18,20 @@ Board::Board(int size){
   for(int i=1; i<=W2; ++i){
     G[i].clear();
   }
-  buildGraph();
+
+  if(type == 0){
+    buildGraph();
+  }
+  if(type == 1){
+    buildGraphTriangle(x);
+  }
+  if(type == 2){
+    buildGraphTrapezium(x);
+  }
+  if(type == 3){
+    buildGraph();
+    disableCenter(x);
+  }
 }
 
 Board::~Board(void){
@@ -29,7 +42,6 @@ Board::~Board(void){
   }
   std::memset(G, 0, sizeof(G));
   std::memset(id, 0, sizeof(id));
-
 }
 
 int Board::getColor(int x, int y){
@@ -69,10 +81,6 @@ void Board::fillRandom(int p){
       if(!fixed[i][j])
         color[i][j] = ((rand() % 100) < p);
     }
-    color[0][i] = 1;
-    color[n+1][i] = 1;
-    color[i][0] = 0;
-    color[i][n+1] = 0;
   }
   std::memset(art, 0, sizeof(art));
 }
@@ -91,7 +99,7 @@ void Board::move(int i, int j, bool col)
 
 std::pair<int,int> Board::generateMove(int t, bool col){
 
-    std::pair<int, int> rs;
+    std::pair<int, int> rs = {-1, -1};
 
     for(int i=1; i<=t; ++i){
         fillRandom(50);
@@ -141,6 +149,182 @@ bool Board::isFixed(int i, int j){
     return fixed[i][j];
 }
 
+void Board::buildGraphTrapezium(int x)
+{
+  int dx[] = {1, 0, -1, 0, -1, 1};
+  int dy[] = {0, 1, 0, -1, 1, -1};
+
+  int h = 0;
+  for(int i=1; i<=n; i++)
+    for(int j=1; j<=n; j++)
+      if(i+j>n && i>x)
+        id[i][j] = ++h, key[h] = {i,j};
+
+  for(int i=0; i<=n+1; ++i)
+    for(int j=0; j<=n+1; ++j)
+      if(i+j<n || i<=x || (i==n+1 && j==0) || (i==n+1 && j==n+1)
+          || (i==0 && j==n+1))
+      {
+        color[i][j] = -2;
+        fixed[i][j] = 1;
+      }
+
+  for(int i=1; i<=W2; ++i){
+    G[i].clear();
+  }
+
+  for(int i=x+1; i<n; ++i){
+    color[0+i][n-i] = 0;
+    id[0+i][n-i] = W1;
+    G[W1].push_back(id[0+i+1][n-i]);
+    G[id[0+i+1][n-i]].push_back(W1);
+    fixed[0+i][n-i] = 1;
+  }
+  for(int i=1; i<=x; ++i){
+    color[x][n-i+1] = 1;
+    id[x][n-i+1] = B1;
+    G[B1].push_back(id[x+1][n-i+1]);
+    G[id[x+1][n-i+1]].push_back(B1);
+    fixed[x][n-i+1] = 1;
+  }
+  G[B1].push_back(id[x+1][n-x]);
+  G[id[x+1][n-x]].push_back(B1);
+
+  color[n][0] = -2;
+  fixed[n][0] = 1;
+
+  key[B1] = {x, n};
+  key[B2] = {n+1, 1};
+
+  key[W1] = {x+1, n-x-1};
+  key[W2] = {n, n+1};
+
+
+  for(int i=1; i<=n; ++i){
+    id[n+1][i] = B2;
+    color[n+1][i] = 1;
+    if(i>x)
+    {
+      id[i][n+1] = W2;
+      color[i][n+1] = 0;
+      fixed[i][n+1] = 1;
+    }
+
+    fixed[n+1][i] = 1;
+
+    G[B2].push_back(id[n][i]);
+    G[id[n][i]].push_back(B2);
+
+    G[W2].push_back(id[i][n]);
+    G[id[i][n]].push_back(W2);
+  }
+
+  for(int i=1; i<=n; i++)
+    for(int j=1; j<=n; j++){
+      if(i+j <= n || i<=x)
+        continue;
+      for(int k=0; k<6; ++k){
+        if((i+dx[k]<1 || i+dx[k]>n) + (j+dy[k]<1 || j+dy[k]>n) < 2)
+        {
+          bool nu = 0;
+          for(auto el: G[id[i][j]])
+            if(el == id[i+dx[k]][j+dy[k]])
+              nu = 1;
+          if(!nu){
+            G[id[i][j]].push_back(id[i+dx[k]][j+dy[k]]);
+            G[id[i+dx[k]][j+dy[k]]].push_back(id[i][j]);
+          }
+        }
+      }
+    }
+}
+
+void Board::buildGraphTriangle(int x)
+{
+  int dx[] = {1, 0, -1, 0, -1, 1};
+  int dy[] = {0, 1, 0, -1, 1, -1};
+
+  int h = 0;
+  for(int i=1; i<=n; i++)
+    for(int j=1; j<=n; j++)
+      if(i+j>n)
+        id[i][j] = ++h, key[h] = {i,j};
+
+  for(int i=0; i<=n+1; ++i)
+    for(int j=0; j<=n+1; ++j)
+      if(i+j<n || (i==n+1 && j==0) || (i==n+1 && j==n+1)
+          || (i==0 && j==n+1))
+      {
+        color[i][j] = -2;
+        fixed[i][j] = 1;
+      }
+
+  for(int i=1; i<=W2; ++i){
+    G[i].clear();
+  }
+
+  for(int i=0; i<n; ++i){
+    color[0+i][n-i] = (i<x);
+    if(i<x){
+      id[0+i][n-i] = B1;
+      G[B1].push_back(id[0+i+1][n-i]);
+      G[id[0+i+1][n-i]].push_back(B1);
+    }
+    else{
+      id[0+i][n-i] = W1;
+      G[W1].push_back(id[0+i+1][n-i]);
+      G[id[0+i+1][n-i]].push_back(W1);
+    }
+
+    fixed[0+i][n-i] = 1;
+  }
+
+  color[n][0] = -2;
+  fixed[n][0] = 1;
+
+  key[B1] = {0, n};
+  key[B2] = {n+1, 1};
+
+  key[W1] = {n-1, 1};
+  key[W2] = {1, n+1};
+
+
+  for(int i=1; i<=n; ++i){
+    id[n+1][i] = B2;
+    color[n+1][i] = 1;
+    id[i][n+1] = W2;
+    color[i][n+1] = 0;
+
+    fixed[n+1][i] = 1;
+    fixed[i][n+1] = 1;
+
+    G[B2].push_back(id[n][i]);
+    G[id[n][i]].push_back(B2);
+
+    G[W2].push_back(id[i][n]);
+    G[id[i][n]].push_back(W2);
+  }
+
+  for(int i=1; i<=n; i++)
+    for(int j=1; j<=n; j++){
+      if(i+j <= n)
+        continue;
+      for(int k=0; k<6; ++k){
+        if((i+dx[k]<1 || i+dx[k]>n) + (j+dy[k]<1 || j+dy[k]>n) < 2)
+        {
+          bool nu = 0;
+          for(auto el: G[id[i][j]])
+            if(el == id[i+dx[k]][j+dy[k]])
+              nu = 1;
+          if(!nu){
+            G[id[i][j]].push_back(id[i+dx[k]][j+dy[k]]);
+            G[id[i+dx[k]][j+dy[k]]].push_back(id[i][j]);
+          }
+        }
+      }
+    }
+}
+
 void Board::buildGraph()
 {
   int dx[] = {1, 0, -1, 0, -1, 1};
@@ -150,12 +334,33 @@ void Board::buildGraph()
     for(int j=1; j<=n; j++)
       id[i][j] = n*(i-1) + j, key[n*(i-1)+ j] = {i,j};
 
+  color[0][0] = -2;
+  color[n+1][n+1] = -2;
+  color[n+1][0] = -2;
+  color[0][n+1] = -2;
+
+  for(int i=1; i<=n; ++i){
+    color[0][i] = 1;
+    color[n+1][i] = 1;
+    color[i][0] = 0;
+    color[i][n+1] = 0;
+    fixed[0][i] = 1;
+    fixed[n+1][i] = 1;
+    fixed[i][0] = 1;
+    fixed[i][n+1] = 1;
+  }
+
+
+  fixed[0][0] = 1;
+  fixed[n+1][n+1] = 1;
+  fixed[n+1][0] = 1;
+  fixed[0][n+1] = 1;
+
   key[B1] = {0, 1};
   key[B2] = {n+1, 1};
 
   key[W1] = {1, 0};
   key[W2] = {1, n+1};
-
 
   for(int i=1; i<=W2; ++i){
     G[i].clear();

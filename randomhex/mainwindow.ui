@@ -27,7 +27,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab1">
        <attribute name="title">
@@ -73,6 +73,13 @@
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
                <layout class="QGridLayout" name="gridLayout_3">
+                <item row="0" column="1">
+                 <widget class="QPushButton" name="fillAndPivots">
+                  <property name="text">
+                   <string>Board and Pivots</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="2">
                  <layout class="QHBoxLayout" name="horizontalLayout_2"/>
                 </item>
@@ -94,10 +101,34 @@
                   </item>
                  </layout>
                 </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_9">
+                <item row="1" column="1">
+                 <widget class="QSpinBox" name="mainX">
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <number>19</number>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="1">
-                 <widget class="QPushButton" name="fillAndPivots">
+                 <widget class="QComboBox" name="mainType"/>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_10">
                   <property name="text">
-                   <string>Board and Pivots</string>
+                   <string>Board Type</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_11">
+                  <property name="text">
+                   <string>X = </string>
                   </property>
                  </widget>
                 </item>
@@ -229,22 +260,53 @@
             </widget>
            </item>
            <item>
+            <layout class="QGridLayout" name="gridLayout_10">
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="simX">
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>19</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="simType"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Game Type</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>X = </string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
             <layout class="QGridLayout" name="gridLayout_6">
-             <item row="1" column="0" alignment="Qt::AlignRight">
+             <item row="0" column="0" alignment="Qt::AlignRight">
               <widget class="QLabel" name="label_5">
                <property name="text">
                 <string>Board Size n= </string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0" alignment="Qt::AlignRight">
+             <item row="1" column="0" alignment="Qt::AlignRight">
               <widget class="QLabel" name="label_6">
                <property name="text">
                 <string>Waiting time t=</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
+             <item row="0" column="2">
               <widget class="QSpinBox" name="simSize">
                <property name="minimum">
                 <number>1</number>
@@ -257,27 +319,13 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="2">
+             <item row="1" column="2">
               <widget class="QSpinBox" name="waitTimeSim">
                <property name="maximum">
                 <number>2000</number>
                </property>
                <property name="singleStep">
                 <number>100</number>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QSpinBox" name="simCenter">
-               <property name="maximum">
-                <number>8</number>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_9">
-               <property name="text">
-                <string>Center Size</string>
                </property>
               </widget>
              </item>
@@ -336,10 +384,16 @@
         </item>
         <item row="0" column="4" rowspan="3">
          <widget class="QGroupBox" name="panel3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
             <width>200</width>
-            <height>100</height>
+            <height>686</height>
            </size>
           </property>
           <property name="title">
@@ -389,18 +443,31 @@
             </widget>
            </item>
            <item>
-            <layout class="QGridLayout" name="gridLayout_8">
-             <item row="0" column="1">
-              <widget class="QSpinBox" name="gameCenter">
+            <layout class="QGridLayout" name="gridLayout_11">
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="gameX">
+               <property name="minimum">
+                <number>1</number>
+               </property>
                <property name="maximum">
-                <number>9</number>
+                <number>19</number>
                </property>
               </widget>
              </item>
-             <item row="0" column="0" alignment="Qt::AlignRight">
-              <widget class="QLabel" name="label_8">
+             <item row="0" column="1">
+              <widget class="QComboBox" name="gameType"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_13">
                <property name="text">
-                <string>Center size s=</string>
+                <string>Game Type</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>X = </string>
                </property>
               </widget>
              </item>

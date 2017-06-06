@@ -14,25 +14,60 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    mainBoard(NULL),
+    mainBoardSim(NULL),
+    gameBoard(NULL)
 {
 
+    mainType = 0;
+    mainX = 1;
+    mainSize = 11;
+
+    simType = 0;
+    simX = 1;
+    simSize = 11;
+
+    gameType = 0;
+    gameX = 1;
+    gameSize = 11;
 
     ui->setupUi(this);
-    mainBoard = new Board(11);
-    ui->boardView->setBoard(mainBoard);
+
+    resetMain();
     ui->boardView->getItem()->setStyle(1, 1, 0, 0);
 
-    mainBoardSim = new Board(11);
-    ui->boardViewSim->setBoard(mainBoardSim);
+    resetSim();
     ui->boardViewSim->getItem()->setStyle(0, 0, 0, 0);
 
-    gameBoard = new Board(11);
-    ui->gameView->setBoard(gameBoard);
-    ui->gameViewSim->setBoard(gameBoard);
+    resetGame();
     ui->gameView->getItem()->setStyle(1, 1, 0, 0);
     ui->gameViewSim->getItem()->setStyle(0, 0, 1, 1);
 
+    ui->mainType->addItem(QString("Standard"));
+    ui->mainType->addItem(QString("Triangle"));
+    ui->mainType->addItem(QString("Trapezium"));
+    ui->mainType->addItem(QString("Center"));
+    ui->mainType->setCurrentIndex(0);
+    
+    ui->simType->addItem(QString("Standard"));
+    ui->simType->addItem(QString("Triangle"));
+    ui->simType->addItem(QString("Trapezium"));
+    ui->simType->addItem(QString("Center"));
+    ui->mainType->setCurrentIndex(0);
+
+    ui->gameType->addItem(QString("Standard"));
+    ui->gameType->addItem(QString("Triangle"));
+    ui->gameType->addItem(QString("Trapezium"));
+    ui->gameType->addItem(QString("Center"));
+    ui->mainType->setCurrentIndex(0);
+
+    connect(ui->mainType, SIGNAL(currentIndexChanged(int)),
+        this, SLOT(setMainType(int)));
+    connect(ui->simType, SIGNAL(currentIndexChanged(int)),
+        this, SLOT(setSimType(int)));
+    connect(ui->gameType, SIGNAL(currentIndexChanged(int)),
+        this, SLOT(setGameType(int)));
 
     ui->progressBarSim->setOrientation(Qt::Horizontal);
     ui->progressBarSim->setRange(1, 5000);
@@ -45,17 +80,15 @@ MainWindow::MainWindow(QWidget *parent) :
     mProb = 50;
     waitTimeSim = 0;
     gameProb = 50;
-    gameSize = 11;
     gameWaitTime = 0;
-    gameCenter = 0;
 
     connect(ui->mainProb, SIGNAL(valueChanged(int)),
         this, SLOT(setMProb(int)));
 
     connect(ui->mainSize, SIGNAL(valueChanged(int)),
-        this, SLOT(setMSize(int)));
+        this, SLOT(setMainSize(int)));
     connect(ui->simSize, SIGNAL(valueChanged(int)),
-        this, SLOT(setSSize(int)));
+        this, SLOT(setSimSize(int)));
 
     connect(ui->waitTimeSim, SIGNAL(valueChanged(int)),
         this, SLOT(setWaitTimeSim(int)));
@@ -68,11 +101,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->gameSize, SIGNAL(valueChanged(int)),
         this, SLOT(setGameSize(int)));
-    connect(ui->gameCenter, SIGNAL(valueChanged(int)),
-        this, SLOT(setGameCenter(int)));
 
-    connect(ui->simCenter, SIGNAL(valueChanged(int)),
-        this, SLOT(setSimCenter(int)));
+    connect(ui->mainX, SIGNAL(valueChanged(int)),
+        this, SLOT(setMainX(int)));
+    connect(ui->simX, SIGNAL(valueChanged(int)),
+        this, SLOT(setSimX(int)));
+    connect(ui->gameX, SIGNAL(valueChanged(int)),
+        this, SLOT(setGameX(int)));
 }
 
 MainWindow::~MainWindow()
@@ -90,49 +125,73 @@ void MainWindow::setGameProb(int v){
 }
 
 void MainWindow::setGameSize(int v){
-  this->gameSize = v;
-  delete gameBoard;
-  gameBoard = new Board(v);
-  ui->gameView->setBoard(gameBoard);
-  ui->gameViewSim->setBoard(gameBoard);
+  gameSize = v;
+  resetGame();
 }
 
-void MainWindow::setGameCenter(int v){
-  this->gameCenter = v;
-  if(gameCenter > 0){
-    gameBoard->disableCenter(gameCenter);
-  }
-  on_resetGame_clicked();
+void MainWindow::setMainType(int k){
+  mainType = k;
+  resetMain();
+}
+void MainWindow::setSimType(int k){
+  simType = k;
+  resetSim();
+}
+void MainWindow::setGameType(int k){
+  gameType = k;
+  resetGame();
 }
 
+void MainWindow::setMainX(int k){
+  mainX = k;
+  resetMain();
+}
+void MainWindow::setSimX(int k){
+  simX = k;
+  resetSim();
+}
+void MainWindow::setGameX(int k){
+  gameX = k;
+  resetGame();
+}
 void MainWindow::setWaitTimeSim(int v){
   this->waitTimeSim = v;
-}
-
-void MainWindow::setSimCenter(int v){
-  mainBoardSim = new Board(mainBoardSim->boardSize());
-  ui->boardViewSim->setBoard(mainBoardSim);
-  this->simCenter = v;
-  if(simCenter > 0){
-    mainBoardSim->disableCenter(simCenter);
-  }
-  ui->boardViewSim->scene()->update();
 }
 
 void MainWindow::setMProb(int v){
   this->mProb = v;
 }
 
-void MainWindow::setMSize(int v){
-  delete mainBoard;
-  mainBoard = new Board(v);
+void MainWindow::setMainSize(int v){
+  mainSize = v;
+  resetMain();
+}
+
+void MainWindow::setSimSize(int v){
+  simSize = v;
+  resetSim();
+}
+
+void MainWindow::resetMain(){
+  if(mainBoard)
+    delete mainBoard;
+  mainBoard = new Board(mainSize, mainType, mainX);
   ui->boardView->setBoard(mainBoard);
 }
 
-void MainWindow::setSSize(int v){
-  delete mainBoardSim;
-  mainBoardSim = new Board(v);
+void MainWindow::resetSim(){
+  if(mainBoardSim)
+    delete mainBoardSim;
+  mainBoardSim = new Board(simSize, simType, simX);
   ui->boardViewSim->setBoard(mainBoardSim);
+}
+
+void MainWindow::resetGame(){
+  if(gameBoard)
+    delete gameBoard;
+  gameBoard = new Board(gameSize, gameType, gameX);
+  ui->gameView->setBoard(gameBoard);
+  ui->gameViewSim->setBoard(gameBoard);
 }
 
 void MainWindow::on_fillBoard_clicked()
@@ -201,8 +260,8 @@ void MainWindow::on_startAlternative_clicked(){
   on_resetGame_clicked();
   int curr = 0;
   int nrmoves = 50000;
-  std::pair<int, int> rs = std::make_pair(1, 1);
-  while(rs != std::make_pair(0, 0))
+  std::pair<int, int> rs = {1, 1};
+  while(rs != std::make_pair(-1, -1))
   {
     rs = makeMove(curr, nrmoves);
     curr = !curr;
@@ -210,14 +269,14 @@ void MainWindow::on_startAlternative_clicked(){
 }
 
 void MainWindow::on_startRandom_clicked(){
-  on_resetGame_clicked();
+  resetGame();
   int nrmoves = 50000;
-  std::pair<int, int> rs = std::make_pair(1, 1);
+  std::pair<int, int> rs = {1, 1};
   bool ft = (rand()%100)<gameProb;
   int n = gameBoard->boardSize();
   gameBoard->move(n/2+n%2, n/2+n%2, ft);
   ui->gameView->scene()->update();
-  while(rs != std::make_pair(0, 0))
+  while(rs != std::make_pair(-1, -1))
   {
     rs = makeMove((rand()%100)<gameProb, nrmoves);
   }
@@ -225,12 +284,7 @@ void MainWindow::on_startRandom_clicked(){
 
 void MainWindow::on_resetGame_clicked()
 {
-  delete gameBoard;
-  gameBoard = new Board(gameSize);
-  ui->gameView->setBoard(gameBoard);
-  ui->gameViewSim->setBoard(gameBoard);
-  if(gameCenter > 0)
-    gameBoard->disableCenter(gameCenter);
+  resetGame();
 }
 
 std::pair<int, int> MainWindow::makeMove(bool col, int tt){
@@ -244,7 +298,6 @@ std::pair<int, int> MainWindow::makeMove(bool col, int tt){
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     std::pair<int, int> rs;
-    std::cout<<std::setprecision(12);
 
     for(int i=1; i<=100; ++i){
       ui->gameProgress->setValue(i);
@@ -254,8 +307,8 @@ std::pair<int, int> MainWindow::makeMove(bool col, int tt){
       double diff = 0;
       for(int j=1; j<=n; ++j)
           for(int k=1; k<=n; ++k)
-            diff = std::max(gameBoard->getProb(j, k) - gameBoard->getProbPr(j, k), diff);
-      std::cout<<diff<<"\n";
+            diff = std::max(gameBoard->getProb(j, k)
+                - gameBoard->getProbPr(j, k), diff);
 
 
       ui->gameViewSim->scene()->update();
