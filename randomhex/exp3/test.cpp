@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
         
         // read-write
         cout<<"#!/bin/bash\n";
-        cout<<"#SBATCH --time=10:00:00\n";
+        cout<<"#SBATCH --time=01:00:00\n";
         cout<<"#SBATCH --nodes=1\n";
         cout<<"#SBATCH --ntasks=1\n";
         cout<<"#SBATCH --job-name=pp"<<n<<"\n";
