@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --time=10:00:00
+#SBATCH --time=01:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --job-name=pp19
 #SBATCH --mem=500
-./simulate 19 876533334
+./simulate 19 292413591

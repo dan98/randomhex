@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --time=10:00:00
+#SBATCH --time=01:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --job-name=pp12
 #SBATCH --mem=500
-./simulate 12 843761856
+./simulate 12 1890174533
