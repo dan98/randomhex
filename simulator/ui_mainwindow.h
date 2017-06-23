@@ -69,6 +69,7 @@ public:
     BoardWidget *boardViewSim;
     QGroupBox *panel2;
     QVBoxLayout *verticalLayout;
+    QPushButton *takeScreenshot;
     QPushButton *simulatePivot;
     QGridLayout *gridLayout_10;
     QSpinBox *simX;
@@ -91,6 +92,9 @@ public:
     QFrame *line;
     QPushButton *nextRandomTurn;
     QPushButton *resetGame;
+    QFrame *line_4;
+    QPushButton *takeGameBoard;
+    QPushButton *takeProbabilityBoard;
     QFrame *line_3;
     QGridLayout *gridLayout_11;
     QSpinBox *gameX;
@@ -118,7 +122,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(800, 800);
+        MainWindow->resize(800, 801);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -305,6 +309,11 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        takeScreenshot = new QPushButton(panel2);
+        takeScreenshot->setObjectName(QString::fromUtf8("takeScreenshot"));
+
+        verticalLayout->addWidget(takeScreenshot);
+
         simulatePivot = new QPushButton(panel2);
         simulatePivot->setObjectName(QString::fromUtf8("simulatePivot"));
         simulatePivot->setAutoFillBackground(false);
@@ -438,6 +447,23 @@ public:
         resetGame->setObjectName(QString::fromUtf8("resetGame"));
 
         verticalLayout_5->addWidget(resetGame);
+
+        line_4 = new QFrame(panel3);
+        line_4->setObjectName(QString::fromUtf8("line_4"));
+        line_4->setFrameShape(QFrame::HLine);
+        line_4->setFrameShadow(QFrame::Sunken);
+
+        verticalLayout_5->addWidget(line_4);
+
+        takeGameBoard = new QPushButton(panel3);
+        takeGameBoard->setObjectName(QString::fromUtf8("takeGameBoard"));
+
+        verticalLayout_5->addWidget(takeGameBoard);
+
+        takeProbabilityBoard = new QPushButton(panel3);
+        takeProbabilityBoard->setObjectName(QString::fromUtf8("takeProbabilityBoard"));
+
+        verticalLayout_5->addWidget(takeProbabilityBoard);
 
         line_3 = new QFrame(panel3);
         line_3->setObjectName(QString::fromUtf8("line_3"));
@@ -580,7 +606,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -600,6 +626,7 @@ public:
         label_2->setText(QApplication::translate("MainWindow", "Board size n=", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab1), QApplication::translate("MainWindow", "Main", 0, QApplication::UnicodeUTF8));
         panel2->setTitle(QApplication::translate("MainWindow", "Control Panel", 0, QApplication::UnicodeUTF8));
+        takeScreenshot->setText(QApplication::translate("MainWindow", "Screenshot", 0, QApplication::UnicodeUTF8));
         simulatePivot->setText(QApplication::translate("MainWindow", "Most Pivotal Hexes", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("MainWindow", "Game Type", 0, QApplication::UnicodeUTF8));
         label_12->setText(QApplication::translate("MainWindow", "X = ", 0, QApplication::UnicodeUTF8));
@@ -612,6 +639,8 @@ public:
         startAlternative->setText(QApplication::translate("MainWindow", "Start Alternative Game", 0, QApplication::UnicodeUTF8));
         nextRandomTurn->setText(QApplication::translate("MainWindow", "Next Random Move", 0, QApplication::UnicodeUTF8));
         resetGame->setText(QApplication::translate("MainWindow", "Reset Game", 0, QApplication::UnicodeUTF8));
+        takeGameBoard->setText(QApplication::translate("MainWindow", "Screenshot Game Board", 0, QApplication::UnicodeUTF8));
+        takeProbabilityBoard->setText(QApplication::translate("MainWindow", "Screenshot Probability Board", 0, QApplication::UnicodeUTF8));
         label_13->setText(QApplication::translate("MainWindow", "Game Type", 0, QApplication::UnicodeUTF8));
         label_14->setText(QApplication::translate("MainWindow", "X = ", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("MainWindow", "Waiting time t=", 0, QApplication::UnicodeUTF8));

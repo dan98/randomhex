@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>800</height>
+    <height>801</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -27,7 +27,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab1">
        <attribute name="title">
@@ -250,6 +250,13 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
+            <widget class="QPushButton" name="takeScreenshot">
+             <property name="text">
+              <string>Screenshot</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="simulatePivot">
              <property name="autoFillBackground">
               <bool>false</bool>
@@ -432,6 +439,27 @@
             <widget class="QPushButton" name="resetGame">
              <property name="text">
               <string>Reset Game</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="takeGameBoard">
+             <property name="text">
+              <string>Screenshot Game Board</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="takeProbabilityBoard">
+             <property name="text">
+              <string>Screenshot Probability Board</string>
              </property>
             </widget>
            </item>

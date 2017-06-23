@@ -10,6 +10,8 @@
 #include <QtConcurrentRun>
 #include <QFuture>
 #include <QFutureWatcher>
+#include <QFileDialog>
+#include <QSvgGenerator>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -256,6 +258,75 @@ void MainWindow::on_moveWhite_clicked()
   makeMove(0);
 }
 
+void MainWindow::on_takeScreenshot_clicked()
+{
+  QString newPath = QFileDialog::getSaveFileName(this, "Save Scene", "", "SVG Files (*.svg)");
+  // Take file path and name that will create
+
+  if (newPath.isEmpty())
+      return;
+
+
+  QSvgGenerator generator;        // Create a file generator object
+  generator.setFileName(newPath);    // We set the path to the file where to save vector graphics
+  generator.setSize(QSize(this->ui->boardViewSim->scene()->width(), this->ui->boardViewSim->scene()->height()));
+  // Set the dimensions of the working area of the document in millimeters
+  generator.setViewBox(QRect(0, 0, this->ui->boardViewSim->scene()->width(), this->ui->boardViewSim->scene()->height())); // Set the work area in the coordinates
+  generator.setTitle(trUtf8("SVG Example"));                          // The title document 
+  generator.setDescription(trUtf8("File created by SVG Example"));    
+
+  QPainter painter;
+  painter.begin(&generator); 
+  this->ui->boardViewSim->scene()->render(&painter);   
+  painter.end();              
+}
+
+
+void MainWindow::on_takeGameBoard_clicked()
+{
+  QString newPath = QFileDialog::getSaveFileName(this, "Save Scene", "", "SVG Files (*.svg)");
+  // Take file path and name that will create
+
+  if (newPath.isEmpty())
+      return;
+
+
+  QSvgGenerator generator;        // Create a file generator object
+  generator.setFileName(newPath);    // We set the path to the file where to save vector graphics
+  generator.setSize(QSize(this->ui->gameView->scene()->width(), this->ui->gameView->scene()->height()));
+  // Set the dimensions of the working area of the document in millimeters
+  generator.setViewBox(QRect(0, 0, this->ui->gameView->scene()->width(), this->ui->gameView->scene()->height())); // Set the work area in the coordinates
+  generator.setTitle(trUtf8("SVG Example"));                          // The title document 
+  generator.setDescription(trUtf8("File created by SVG Example"));    
+
+  QPainter painter;
+  painter.begin(&generator); 
+  this->ui->gameView->scene()->render(&painter);   
+  painter.end();              
+}
+
+void MainWindow::on_takeProbabilityBoard_clicked()
+{
+  QString newPath = QFileDialog::getSaveFileName(this, "Save Scene", "", "SVG Files (*.svg)");
+  // Take file path and name that will create
+
+  if (newPath.isEmpty())
+      return;
+
+
+  QSvgGenerator generator;        // Create a file generator object
+  generator.setFileName(newPath);    // We set the path to the file where to save vector graphics
+  generator.setSize(QSize(this->ui->gameViewSim->scene()->width(), this->ui->gameViewSim->scene()->height()));
+  // Set the dimensions of the working area of the document in millimeters
+  generator.setViewBox(QRect(0, 0, this->ui->gameViewSim->scene()->width(), this->ui->gameViewSim->scene()->height())); // Set the work area in the coordinates
+  generator.setTitle(trUtf8("SVG Example"));                          // The title document 
+  generator.setDescription(trUtf8("File created by SVG Example"));    
+
+  QPainter painter;
+  painter.begin(&generator); 
+  this->ui->gameViewSim->scene()->render(&painter);   
+  painter.end();              
+}
 void MainWindow::on_startAlternative_clicked(){
   on_resetGame_clicked();
   int curr = 0;

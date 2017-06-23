@@ -37,6 +37,11 @@ private slots:
     void on_moveBlack_clicked();
     void on_moveWhite_clicked();
 
+    void on_takeScreenshot_clicked();
+
+    void on_takeGameBoard_clicked();
+    void on_takeProbabilityBoard_clicked();
+
     void setMProb(int v);
     void setMainSize(int v);
     void setSimSize(int v);
