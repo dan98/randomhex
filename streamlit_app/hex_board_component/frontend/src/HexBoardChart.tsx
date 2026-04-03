@@ -34,7 +34,9 @@ interface Props {
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
-const PADDING = 44;
+function getPadding(containerWidth: number): number {
+  return containerWidth < 500 ? 16 : 44;
+}
 
 function cellFill(d: CellData): string {
   if (d.state === "disabled") return PAL.disabled;
@@ -48,6 +50,7 @@ function buildBorderGraphics(
   r: number,
   px: number,
   py: number,
+  containerWidth: number,
 ): any[] {
   const rr = r * 0.96;
   const t = r * 0.28; // thickness of edge strips
@@ -72,7 +75,7 @@ function buildBorderGraphics(
   });
   const edgeStrokeStyle = (color: string) => ({
     stroke: color,
-    lineWidth: 3,
+    lineWidth: containerWidth < 500 ? 2 : 3,
     lineCap: "round" as const,
     lineJoin: "round" as const,
   });
@@ -224,13 +227,14 @@ export default function HexBoardChart({ boardState, onCellClick }: Props) {
   const option = useMemo(() => {
     const { n, cells } = boardState;
     const cw = containerRef.current?.clientWidth ?? 700;
-    const hexR = fitHexRadius(n, cw, 9999, PADDING);
+    const padding = getPadding(cw);
+    const hexR = fitHexRadius(n, cw, 9999, padding);
     const w = Math.sqrt(3) * hexR;
     const h = 2 * hexR;
     const boardW = w * n + w * (n - 1) * 0.5;
     const boardH = h * 0.75 * (n - 1) + h;
     const px = (cw - boardW) / 2;
-    const py = PADDING;
+    const py = padding;
     const chartH = boardH + py * 2;
 
     // Custom series data
@@ -246,7 +250,7 @@ export default function HexBoardChart({ boardState, onCellClick }: Props) {
       };
     });
 
-    const borders = buildBorderGraphics(n, hexR, px, py);
+    const borders = buildBorderGraphics(n, hexR, px, py, cw);
 
     return {
       _chartH: chartH,

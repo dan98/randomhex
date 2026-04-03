@@ -14,7 +14,7 @@ st.set_page_config(
     page_title="Random-Turn Hex",
     page_icon="\u2b21",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 # ── CSS ──────────────────────────────────────────────────────────────────────
@@ -23,7 +23,6 @@ st.markdown(
 <style>
     .main .block-container { padding-top: 1rem; max-width: 1200px; }
     .stSidebar .block-container { padding-top: 1rem; }
-    div[data-testid="stSidebar"] { min-width: 320px; }
     .stat-card {
         background: linear-gradient(135deg, #1a1a2e, #16213e);
         border-radius: 12px; padding: 16px; margin: 4px 0;
@@ -47,6 +46,24 @@ st.markdown(
         margin-bottom: 0;
     }
     .sub-header { font-size: 13px; color: #666; margin-top: -8px; margin-bottom: 16px; }
+
+    /* ── Mobile ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+        .main .block-container {
+            padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.5rem;
+        }
+        /* Shrink the component iframe wrapper padding */
+        iframe[title="hex_board_component.hex_board"] {
+            margin-left: -0.5rem; margin-right: -0.5rem;
+            width: calc(100% + 1rem) !important;
+        }
+        .stat-card { padding: 10px; border-radius: 8px; }
+        .stat-card h4 { font-size: 11px; }
+        .stat-card .value { font-size: 18px; }
+        .header-text { font-size: 22px; }
+        /* Streamlit column gaps */
+        div[data-testid="stHorizontalBlock"] { gap: 0.3rem !important; }
+    }
 </style>
 """,
     unsafe_allow_html=True,
