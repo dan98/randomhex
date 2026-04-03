@@ -33,3 +33,15 @@ TAGS
 *.pyc
 *~
 *.htp
+
+# IDE
+.idea/
+
+# Python
+__pycache__/
+*.egg-info/
+.venv/
+
+# Streamlit app
+streamlit_app/hex_board_component/frontend/node_modules/
+streamlit_app/hex_board_component/frontend/tsconfig.tsbuildinfo
